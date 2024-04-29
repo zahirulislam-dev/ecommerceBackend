@@ -1,5 +1,6 @@
 const MerchantList = require("../models/merchantSchema");
 const UserList = require("../models/userlistSchema");
+
 async function becomeMerchantController(req,res){
     const {storeName, officialEmail, officialPhone, address, owner} = req.body;
     console.log(storeName, officialEmail, officialPhone, address, owner);
