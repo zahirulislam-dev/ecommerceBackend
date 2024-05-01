@@ -25,7 +25,7 @@ const storeSchema = new Schema({
     products: [
        {
         type: Schema.Types.ObjectId,
-        ref: "products"
+        ref: "Product"
        }
 ],
     created:{
@@ -37,4 +37,4 @@ const storeSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model("store", storeSchema);
+module.exports = mongoose.model("Store", storeSchema);

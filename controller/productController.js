@@ -67,7 +67,7 @@ async function createVariantController (req,res){
 }
 
 async function getAllProductController (req,res){
-    const data =await productSchema.find({})
+    const data =await productSchema.find({}).populate("store")
     res.send(data)
 }
 

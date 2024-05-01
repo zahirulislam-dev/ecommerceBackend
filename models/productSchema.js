@@ -14,12 +14,12 @@ const productSchema = new Schema({
     variants: [
     {
         type: Schema.Types.ObjectId,
-        ref: "variant",
+        ref: "Variant",
     }
     ],
     store: {
         type: Schema.Types.ObjectId,
-        ref: "store", 
+        ref: "Store", 
     },
     created:{
         type: Date,
@@ -30,4 +30,4 @@ const productSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model("product", productSchema);
+module.exports = mongoose.model("Product", productSchema);

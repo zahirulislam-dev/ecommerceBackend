@@ -29,7 +29,7 @@ const variantSchema = new Schema({
     },
     product: {
         type: String,
-        ref: "product",
+        ref: "Product",
         required: true,
     },
     created:{
@@ -41,4 +41,4 @@ const variantSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model("variant", variantSchema);
+module.exports = mongoose.model("Variant", variantSchema);
