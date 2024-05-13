@@ -67,8 +67,13 @@ async function createVariantController (req,res){
 }
 
 async function getAllProductController (req,res){
-    const data =await productSchema.find({}).populate("store")
+    const data =await productSchema.find({})
     res.send(data)
 }
 
-module.exports = {secureProductUploadController, createProductController, createVariantController, getAllProductController};
+async function deleteProductController (req,res){
+    console.log("delete");
+    const data = await productSchema.findByIdAndDelete(req.body.id)
+    res.send({success: "Product Delete Successfully Done"})
+}
+module.exports = {secureProductUploadController, createProductController, createVariantController, getAllProductController, deleteProductController};

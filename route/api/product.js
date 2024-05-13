@@ -1,5 +1,5 @@
 const express = require('express');
-const {createProductController, secureProductUploadController, createVariantController, getAllProductController} = require('../../controller/productController');
+const {createProductController, secureProductUploadController, createVariantController, getAllProductController, deleteProductController} = require('../../controller/productController');
 
 const router = express.Router();
 
@@ -25,5 +25,7 @@ router.post("/createVariant", upload.single('image'), createVariantController);
 
 
 router.get("/allproductlist", getAllProductController)
+
+router.post("/deleteproduct", deleteProductController)
 
 module.exports = router;
