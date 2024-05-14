@@ -18,4 +18,9 @@ async function becomeMerchantController(req,res){
     res.json({success: "Congratulations. Now you are a Merchant"})
 }
 
-module.exports = becomeMerchantController;
+async function getAllStoreListController(req,res){
+    const data = await MerchantList.find({})
+    res.send(data)
+}
+
+module.exports = {becomeMerchantController, getAllStoreListController};
