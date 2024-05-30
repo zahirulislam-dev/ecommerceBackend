@@ -2,40 +2,40 @@ const productSchema = require("../models/productSchema");
 const userlistSchema = require("../models/userlistSchema");
 const variantSchema = require("../models/variantSchema");
 
-async function secureProductUploadController(req, res, next){
-    const userId = (req.headers.authorization.split("@"))[1];
-    const password = (req.headers.authorization.split("@"))[2];
-    console.log(userId);
-    console.log(password);
+// async function secureProductUploadController(req, res, next){
+//     const userId = (req.headers.authorization.split("@"))[1];
+//     const password = (req.headers.authorization.split("@"))[2];
+//     console.log(userId);
+//     console.log(password);
 
-    if(!req.headers.authorization){
-        res.json({error: "Authorization Failed"});
-    }
+//     if(!req.headers.authorization){
+//         res.json({error: "Authorization Failed"});
+//     }
 
-   if(!userId){
-    res.json({error: "You Are Unauthorized"});
-   }else{
-    const user = await userlistSchema.find({_id: userId});
-   if(user.length > 0){
-    if(password == "123456"){
-        if(user[0].role == "merchant"){
-            next();
-        }else{
-            res.json({error: "You are not able to create product"});
-        }
-    }else{
-        res.json({error: "Unauthorized"});  
-    }
-   }else{
-    res.json({error: "Unauthorized"});
-   }
-   }
-}
+//    if(!userId){
+//     res.json({error: "You Are Unauthorized"});
+//    }else{
+//     const user = await userlistSchema.find({_id: userId});
+//    if(user.length > 0){
+//     if(password == "123456"){
+//         if(user[0].role == "merchant"){
+//             next();
+//         }else{
+//             res.json({error: "You are not able to create product"});
+//         }
+//     }else{
+//         res.json({error: "Unauthorized"});  
+//     }
+//    }else{
+//     res.json({error: "Unauthorized"});
+//    }
+//    }
+// }
 
-
-function createProductController (req,res){
+ 
+async function createProductController (req,res){
     const {name, description, store} = req.body;
-    const product = new productSchema({
+    const product = await new productSchema({
         name,
         description,
         store  
@@ -46,8 +46,7 @@ function createProductController (req,res){
 
 async function createVariantController (req,res){
     const {color, image, storage, ram, size, price, quantity, product} = req.body;
-    console.log("zahir", req.file.filename);
-    const variant = new variantSchema ({
+    const variant = await new variantSchema ({
         color, 
         image: `http://localhost:3000/upload/${req.file.filename}`, 
         storage, 
@@ -67,13 +66,17 @@ async function createVariantController (req,res){
 }
 
 async function getAllProductController (req,res){
-    const data =await productSchema.find({})
+    const data =await productSchema.find({}).populate("store")
     res.send(data)
 }
 
 async function deleteProductController (req,res){
-    console.log("delete");
     const data = await productSchema.findByIdAndDelete(req.body.id)
     res.send({success: "Product Delete Successfully Done"})
 }
-module.exports = {secureProductUploadController, createProductController, createVariantController, getAllProductController, deleteProductController};
+module.exports = {
+    // secureProductUploadController, 
+    createProductController, 
+    createVariantController, 
+    getAllProductController, 
+    deleteProductController};

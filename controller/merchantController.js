@@ -19,7 +19,7 @@ async function becomeMerchantController(req,res){
 }
 
 async function getAllStoreListController(req,res){
-    const data = await MerchantList.find({})
+    const data = await MerchantList.find({}).populate("store")
     res.send(data)
 }
 
