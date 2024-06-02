@@ -18,8 +18,8 @@ async function becomeMerchantController(req,res){
     res.json({success: "Congratulations. Now you are a Merchant"})
 }
 
-async function getAllStoreListController(req,res){
-    const data = await MerchantList.find({}).populate("store")
+async function getAllStoreListController(req, res){
+    const data = await MerchantList.find({})
     res.send(data)
 }
 
