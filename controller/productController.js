@@ -34,11 +34,11 @@ const variantSchema = require("../models/variantSchema");
 
  
 async function createProductController (req, res){
-    const {name, description, store} = req.body;
+    const {productName, description, storeName} = req.body;
     const product = await new productSchema({
-        name,
+        productName,
         description,
-        store  
+        storeName  
     })
     product.save();
     res.json({success: "Product Create Successfull"})
@@ -65,18 +65,24 @@ async function createVariantController (req, res){
     res.json({success: "Variant Create Successfull"})
 }
 
-async function getAllProductController (req, res){
-    const data = await productSchema.find({}).populate('store')
-    res.send(data)
-}
-
 async function deleteProductController (req, res){
     const data = await productSchema.findByIdAndDelete(req.body.id)
     res.send({success: "Product Delete Successfully Done"})
+}
+
+async function getAllProductController (req, res){
+    const data = await productSchema.find({}).populate("storeName")
+    res.send(data)
+}
+
+async function getAllVariantController (req, res){
+    const data = await variantSchema.find({});
+    res.send(data)
 }
 module.exports = {
     // secureProductUploadController, 
     createProductController, 
     createVariantController, 
     getAllProductController, 
-    deleteProductController};
+    deleteProductController,
+    getAllVariantController};

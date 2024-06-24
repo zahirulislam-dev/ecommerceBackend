@@ -3,6 +3,6 @@ const {createDiscountController, getDiscountController} = require('../../control
 const router = express.Router();
 
 
-router.post("/createDiscount", createDiscountController);
-router.get("/getDiscount", getDiscountController);
+router.post("/creatediscount", createDiscountController);
+router.get("/getdiscount", getDiscountController);
 module.exports = router;

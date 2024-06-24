@@ -8,7 +8,7 @@ const emailVerificationController = require('../../controller/emailVerificationC
 const loginVerificationController = require('../../controller/loginVerificationController');
 
 router.post('/registration', registrationController)
-router.post('/emailVerification', emailVerificationController)
-router.post('/loginVerification', loginVerificationController)
+router.post('/emailverification', emailVerificationController)
+router.post('/loginverification', loginVerificationController)
 
 module.exports = router;
